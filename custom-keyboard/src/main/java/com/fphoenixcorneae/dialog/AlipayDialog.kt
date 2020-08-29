@@ -20,8 +20,20 @@ import kotlinx.android.synthetic.main.dk_dialog_alipay.*
  */
 class AlipayDialog constructor(context: Context) : Dialog(context) {
 
+    /**
+     * 是否正在执行显示动画
+     */
     private var mIsShowAnim: Boolean = false
+
+    /**
+     * 是否正在执行消失动画
+     */
     private var mIsDismissAnim: Boolean = false
+
+    /**
+     * 是否随机数字
+     */
+    var randomDigit = false
 
     /**
      * 支付取消监听器
@@ -42,6 +54,7 @@ class AlipayDialog constructor(context: Context) : Dialog(context) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dk_dialog_alipay)
         initWindowAttr()
+        initView()
         initListener()
     }
 
@@ -55,6 +68,10 @@ class AlipayDialog constructor(context: Context) : Dialog(context) {
             setGravity(Gravity.BOTTOM)
             setDimAmount(.4f)
         }
+    }
+
+    private fun initView() {
+        rvKeyboard.randomDigit = randomDigit
     }
 
     private fun initListener() {

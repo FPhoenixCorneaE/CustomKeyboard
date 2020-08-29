@@ -29,12 +29,11 @@ class DigitKeyboardView constructor(
     /**
      * 是否随机数字
      */
-    private var randomDigit = true
-
-    /**
-     * 适配器
-     */
-    private var digitKeyboardAdapter: DigitKeyboardAdapter
+    var randomDigit = false
+        set(value) {
+            field = value
+            shuffleData()
+        }
 
     /**
      * 数据
@@ -45,9 +44,13 @@ class DigitKeyboardView constructor(
                 throw ArrayIndexOutOfBoundsException("Datas'size must be 10!")
             }
             field = value
-            shuffle()
-            digitKeyboardAdapter.notifyDataSetChanged()
+            shuffleData()
         }
+
+    /**
+     * 适配器
+     */
+    private var digitKeyboardAdapter: DigitKeyboardAdapter? = DigitKeyboardAdapter(datas)
 
     /**
      * 密码变化监听器
@@ -55,14 +58,15 @@ class DigitKeyboardView constructor(
     var onPasswordChangedListener: ((digitPassword: String, isCompleted: Boolean) -> Unit)? = null
         set(value) {
             field = value
-            digitKeyboardAdapter.onPasswordChangedListener = value
+            digitKeyboardAdapter?.onPasswordChangedListener = value
         }
 
-    private fun shuffle() {
+    private fun shuffleData() {
         if (randomDigit) {
             // 此方法是打乱顺序
             datas.shuffle()
         }
+        digitKeyboardAdapter?.notifyDataSetChanged()
     }
 
     init {
@@ -80,9 +84,6 @@ class DigitKeyboardView constructor(
                 ContextCompat.getColor(context, R.color.dk_color_0xe5e5e5)
             )
         )
-        // 数字打乱顺序
-        shuffle()
-        digitKeyboardAdapter = DigitKeyboardAdapter(datas)
         adapter = digitKeyboardAdapter
     }
 }

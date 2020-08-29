@@ -12,11 +12,15 @@ class MainActivity : AppCompatActivity() {
 
 
         btnAlipay.setOnClickListener {
-            AlipayDialog(this).show()
+            AlipayDialog(this).apply {
+                randomDigit = true
+            }
+                .show()
         }
 
         digitKeyboard.onPasswordChangedListener = { digitKeyboard, isCompleted ->
             passwordLayout.setPassword(digitKeyboard)
         }
+        digitKeyboard.randomDigit = true
     }
 }

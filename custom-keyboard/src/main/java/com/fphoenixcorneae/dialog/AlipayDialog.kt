@@ -10,8 +10,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
+import com.fphoenixcorneae.dp2px
 import com.fphoenixcorneae.keyboard.R
-import com.fphoenixcorneae.keyboard.dp2px
 import kotlinx.android.synthetic.main.dk_dialog_alipay.*
 
 /**

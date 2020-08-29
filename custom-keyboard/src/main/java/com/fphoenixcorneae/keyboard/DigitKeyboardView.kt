@@ -1,19 +1,16 @@
 package com.fphoenixcorneae.keyboard
 
-import android.Manifest
 import android.content.Context
-import android.os.Build
-import android.os.VibrationEffect
-import android.os.Vibrator
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fphoenixcorneae.decoration.SpacesItemDecoration
+import com.fphoenixcorneae.dp2px
+import com.fphoenixcorneae.vibrate
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.dk_recycler_item_digit_keyboard.*
 
@@ -161,40 +158,3 @@ class DigitKeyboardAdapter(val datas: MutableList<Int> = mutableListOf()) :
 class DigitKeyboardViewHolder(override val containerView: View) :
     RecyclerView.ViewHolder(containerView), LayoutContainer
 
-/**
- * dp转px
- */
-fun View.dp2px(dpValue: Float): Int {
-    val scale = context.resources.displayMetrics.density
-    return (dpValue * scale + 0.5f).toInt()
-}
-
-/**
- * Vibrate.
- *
- * Must hold `<uses-permission android:name="android.permission.VIBRATE" />`
- *
- * @param milliseconds The number of milliseconds to vibrate.
- */
-@RequiresPermission(Manifest.permission.VIBRATE)
-fun View.vibrate(milliseconds: Long = 10) {
-    val vibrator =
-        context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-    when {
-        vibrator.hasVibrator() -> { // 判断手机硬件是否有振动器
-            when {
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
-                    vibrator.vibrate(
-                        VibrationEffect.createOneShot(
-                            milliseconds,
-                            VibrationEffect.DEFAULT_AMPLITUDE
-                        )
-                    )
-                }
-                else -> {
-                    vibrator.vibrate(milliseconds)
-                }
-            }
-        }
-    }
-}

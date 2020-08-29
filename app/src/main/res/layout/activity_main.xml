@@ -14,6 +14,14 @@
         android:text="调起支付宝支付弹窗"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnIdCard"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:text="自定义身份证键盘"
+        app:layout_constraintTop_toBottomOf="@+id/btnAlipay" />
+
     <com.fphoenixcorneae.keyboard.PasswordLayout
         android:id="@+id/passwordLayout"
         android:layout_width="match_parent"

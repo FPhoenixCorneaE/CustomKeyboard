@@ -12,9 +12,23 @@ class MainActivity : AppCompatActivity() {
 
 
         btnAlipay.setOnClickListener {
-            AlipayDialog(this).apply {
-                randomDigit = true
-            }
+            AlipayDialog(this)
+                .apply {
+                    // 是否随机数字
+                    randomDigit = true
+                    // 支付取消监听器
+                    onPayCancelListener = {
+
+                    }
+                    // 忘记密码监听器
+                    onPasswordForgetListener = {
+
+                    }
+                    // 密码变化监听器
+                    onPasswordChangedListener = { digitKeyboard, isCompleted ->
+
+                    }
+                }
                 .show()
         }
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dk_color_0xf9f9f9">#f9f9f9</color>
+    <color name="dk_color_0xdddddd">#dddddd</color>
+    <color name="dk_color_0xc4c4c4">#c4c4c4</color>
+    <color name="dk_color_0xe3e7ee">#e3e7ee</color>
+    <color name="dk_color_0xe5e5e5">#e5e5e5</color>
+    <color name="dk_color_0x00a5ff">#00a5ff</color>
+    <color name="dk_color_black">#000000</color>
+    <color name="dk_color_white">#ffffff</color>
+</resources>

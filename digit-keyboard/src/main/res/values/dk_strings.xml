@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dk_forget_password">忘记密码？</string>
+    <string name="dk_please_input_pay_password">请输入支付密码</string>
+</resources>

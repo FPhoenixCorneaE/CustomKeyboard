@@ -21,7 +21,8 @@ dependencies {
 }
 ```
 
-##### 密码框
+密码框
+-----------------------------
 
 ```xml
 <com.fphoenixcorneae.keyboard.PasswordLayout
@@ -34,13 +35,13 @@ dependencies {
         app:layout_constraintBottom_toTopOf="@+id/digitKeyboard" />
 ```
 
-设置密码
-================================
+##### 设置密码
 ```kotlin
 passwordLayout.setPassword(digitKeyboard)
 ```
 
-##### 数字键盘
+数字键盘
+--------------------------
 ```xml
 <com.fphoenixcorneae.keyboard.DigitKeyboardView
         android:id="@+id/digitKeyboard"
@@ -51,14 +52,12 @@ passwordLayout.setPassword(digitKeyboard)
         app:layout_constraintRight_toRightOf="parent" />
 ```
 
-随机数字
-===============================
+##### 随机数字
 ```kotlin
 digitKeyboard.randomDigit = true
 ```
 
-密码变化监听
-==============================
+##### 密码变化监听
 ```kotlin
 digitKeyboard.onPasswordChangedListener = { digitKeyboard, isCompleted ->
             passwordLayout.setPassword(digitKeyboard)
@@ -66,7 +65,8 @@ digitKeyboard.onPasswordChangedListener = { digitKeyboard, isCompleted ->
 ```
 
 
-##### 支付宝输入支付密码弹窗
+支付宝输入支付密码弹窗
+----------------------------------
 ```kotlin
 AlipayDialog(this).apply {
                 randomDigit = true

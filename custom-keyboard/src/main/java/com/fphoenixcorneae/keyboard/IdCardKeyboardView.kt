@@ -1,8 +1,12 @@
 package com.fphoenixcorneae.keyboard
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -69,6 +73,9 @@ class IdCardKeyboardAdapter(val datas: MutableList<String> = mutableListOf()) :
     RecyclerView.Adapter<IdCardKeyboardViewHolder>() {
 
     private var idCardNo = ""
+    private var handler = Handler(Looper.getMainLooper())
+    private var onPressedRunnable = OnPressedRunnable()
+    private var isPressed = false
     var onIdCardNoChangedListener: ((idCardNo: String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdCardKeyboardViewHolder {
@@ -79,6 +86,7 @@ class IdCardKeyboardAdapter(val datas: MutableList<String> = mutableListOf()) :
 
     override fun getItemCount(): Int = 12
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: IdCardKeyboardViewHolder, position: Int) {
         holder.apply {
             when (position) {
@@ -87,19 +95,22 @@ class IdCardKeyboardAdapter(val datas: MutableList<String> = mutableListOf()) :
                     itemView.setBackgroundResource(R.drawable.dk_selector_keyboard_key_delete_bg)
                     tvKey.visibility = View.GONE
                     ivDelete.visibility = View.VISIBLE
-                    itemView.setOnClickListener {
-                        it.vibrate()
-                        if (idCardNo.isNotEmpty()) {
-                            idCardNo = idCardNo.dropLast(1)
-                            onIdCardNoChangedListener?.invoke(idCardNo)
+                    itemView.setOnTouchListener { view, motionEvent ->
+                        when (motionEvent.action) {
+                            MotionEvent.ACTION_DOWN -> {
+                                view.vibrate()
+                                isPressed = true
+                                handler.post(onPressedRunnable)
+                                return@setOnTouchListener true
+                            }
+                            MotionEvent.ACTION_UP -> {
+                                isPressed = false
+                            }
+                            MotionEvent.ACTION_CANCEL -> {
+                                isPressed = false
+                            }
                         }
-                    }
-                    itemView.setOnLongClickListener {
-                        if (idCardNo.isNotEmpty()) {
-                            idCardNo = idCardNo.dropLast(1)
-                            onIdCardNoChangedListener?.invoke(idCardNo)
-                        }
-                        return@setOnLongClickListener false
+                        return@setOnTouchListener false
                     }
                 }
                 else -> {
@@ -117,6 +128,25 @@ class IdCardKeyboardAdapter(val datas: MutableList<String> = mutableListOf()) :
                         }
                     }
                 }
+            }
+        }
+    }
+
+    /**
+     * 删除号码
+     */
+    private fun onDeleteNo() {
+        if (idCardNo.isNotEmpty()) {
+            idCardNo = idCardNo.dropLast(1)
+            onIdCardNoChangedListener?.invoke(idCardNo)
+        }
+    }
+
+    inner class OnPressedRunnable : Runnable {
+        override fun run() {
+            if (isPressed) {
+                onDeleteNo()
+                handler.postDelayed(this, 100)
             }
         }
     }

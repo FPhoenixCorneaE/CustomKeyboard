@@ -2,6 +2,15 @@
 自定义键盘
 
 
+<div align="center">
+    <img src="https://github.com/FPhoenixCorneaE/CustomKeyboard/blob/master/images/alipay-dialog.png" width="200" align="top"/>
+	<img src="https://github.com/FPhoenixCorneaE/CustomKeyboard/blob/master/images/idcard-keyboard.png" width="200" align="top" style="margin-left:15px"/>
+</div>
+
+
+-----------------------------------------
+
+
 How to include it in your project:
 --------------
 **Step 1.** Add the JitPack repository to your build file
@@ -88,3 +97,16 @@ AlipayDialog(this)
                 .show()
 ```
 
+身份证号码键盘
+----------------------------------
+```kotlin
+// 隐藏系统软键盘
+        etIdCardNo.hideSystemSoftKeyboard()
+        idCardKeyboard.apply {
+            // 身份证号码变化监听
+            onIdCardNoChangedListener = {
+                etIdCardNo.text = Editable.Factory.getInstance().newEditable(it)
+                etIdCardNo.setSelection(it.length)
+            }
+        }
+```

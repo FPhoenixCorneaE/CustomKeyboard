@@ -31,7 +31,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation project(path: ':custom-keyboard')
+    implementation 'com.github.FPhoenixCorneaE:CustomKeyboard:1.0.1'
+//    implementation project(path: ':custom-keyboard')
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

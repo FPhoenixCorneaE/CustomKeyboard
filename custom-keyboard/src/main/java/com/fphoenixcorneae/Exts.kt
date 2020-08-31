@@ -50,7 +50,7 @@ fun View.vibrate(milliseconds: Long = 10) {
 }
 
 /**
- * 隐藏系统软键盘
+ * 屏蔽系统软键盘
  */
 @SuppressLint("ObsoleteSdkInt")
 fun EditText.hideSystemSoftKeyboard() {

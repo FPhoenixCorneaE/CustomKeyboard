@@ -33,6 +33,15 @@ class DigitKeyboardView constructor(
         }
 
     /**
+     * 最大长度,默认为6
+     */
+    var maxLengths = 6
+        set(value) {
+            field = value
+            digitKeyboardAdapter?.maxLengths = field
+        }
+
+    /**
      * 数据
      */
     var datas = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
@@ -92,6 +101,10 @@ class DigitKeyboardView constructor(
 class DigitKeyboardAdapter(val datas: MutableList<Int> = mutableListOf()) :
     RecyclerView.Adapter<DigitKeyboardViewHolder>() {
 
+    /**
+     * 最大长度,默认为6
+     */
+    var maxLengths = 6
     private var digitPassword = ""
     var onPasswordChangedListener: ((digitPassword: String, isCompleted: Boolean) -> Unit)? = null
 
@@ -137,11 +150,11 @@ class DigitKeyboardAdapter(val datas: MutableList<Int> = mutableListOf()) :
                     tvKey.text = digit.toString()
                     itemView.setOnClickListener {
                         it.vibrate()
-                        if (digitPassword.length < 6) {
+                        if (digitPassword.length < maxLengths) {
                             digitPassword = "$digitPassword$digit"
                             onPasswordChangedListener?.invoke(
                                 digitPassword,
-                                digitPassword.length == 6
+                                digitPassword.length == maxLengths
                             )
                         }
                     }

@@ -28,6 +28,15 @@ class IdCardKeyboardView constructor(
 ) : RecyclerView(context, attributeSet) {
 
     /**
+     * 最大长度,默认为18
+     */
+    var maxLengths = 18
+        set(value) {
+            field = value
+            idCardKeyboardAdapter.maxLengths = field
+        }
+
+    /**
      * 数据
      */
     var datas = arrayListOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "X", "0")
@@ -72,6 +81,10 @@ class IdCardKeyboardView constructor(
 class IdCardKeyboardAdapter(val datas: MutableList<String> = mutableListOf()) :
     RecyclerView.Adapter<IdCardKeyboardViewHolder>() {
 
+    /**
+     * 最大长度,默认为18
+     */
+    var maxLengths = 18
     private var idCardNo = ""
     private var handler = Handler(Looper.getMainLooper())
     private var onPressedRunnable = OnPressedRunnable()
@@ -122,7 +135,7 @@ class IdCardKeyboardAdapter(val datas: MutableList<String> = mutableListOf()) :
                     tvKey.text = no
                     itemView.setOnClickListener {
                         it.vibrate()
-                        if (idCardNo.length < 18) {
+                        if (idCardNo.length < maxLengths) {
                             idCardNo = "$idCardNo$no"
                             onIdCardNoChangedListener?.invoke(idCardNo)
                         }

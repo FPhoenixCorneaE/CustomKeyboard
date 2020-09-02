@@ -13,6 +13,7 @@ class IdCardKeyboardActivity : AppCompatActivity(R.layout.activity_id_card_keybo
         // 隐藏系统软键盘
         etIdCardNo.hideSystemSoftKeyboard()
         idCardKeyboard.apply {
+            idCardKeyboard.maxLengths = 4
             // 身份证号码变化监听
             onIdCardNoChangedListener = {
                 etIdCardNo.text = Editable.Factory.getInstance().newEditable(it)

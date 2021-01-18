@@ -26,7 +26,7 @@ allprojects {
 **Step 2.** Add the dependency
 ```groovy
 dependencies {
-	implementation 'com.github.FPhoenixCorneaE:CustomKeyboard:1.0.1'
+	implementation 'com.github.FPhoenixCorneaE:CustomKeyboard:1.0.4'
 }
 ```
 
